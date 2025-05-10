@@ -10,6 +10,14 @@ public class groundSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (groundPrefab == null)
+        {
+            Debug.LogError("Ground Prefab ist nicht zugewiesen!");
+        }
+        else
+        {
+            Debug.Log("Ground Prefab OK: " + groundPrefab.name);
+        }
         SpawnGround();
     }
 

@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d76add89c7951942a75f5b88ed3064d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundPrefab: {fileID: 8150112531656641441}
+  groundPrefab: {fileID: 6046256244979845032, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
   nextSpawnPos: {x: 18.597, y: -6.16, z: 0}
 --- !u!4 &1854941758
 Transform:
@@ -1475,21 +1475,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3733791777960577703, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
-      propertyPath: m_Size.x
-      value: 18.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733791777960577703, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
-      propertyPath: m_Offset.x
-      value: 35.2
-      objectReference: {fileID: 0}
     - target: {fileID: 6046256244979845032, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
       propertyPath: m_Name
       value: GroundParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 6046256244979845032, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
-      propertyPath: m_TagString
-      value: spawnGround
       objectReference: {fileID: 0}
     - target: {fileID: 7433174316208860545, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
       propertyPath: m_RootOrder
@@ -1540,8 +1528,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
---- !u!1 &8150112531656641441 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6046256244979845032, guid: b8dffb58dd8fdc146b46363a4724457e, type: 3}
-  m_PrefabInstance: {fileID: 8150112531656641440}
-  m_PrefabAsset: {fileID: 0}
