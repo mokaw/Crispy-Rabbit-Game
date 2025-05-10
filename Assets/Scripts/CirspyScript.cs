@@ -43,7 +43,21 @@ public class CirspyScript : MonoBehaviour
     {
         if (other.CompareTag("ground"))
         {
-            isJumping = false;
+            isJumping = false;     
+        }
+
+        if (other.CompareTag("spawnGround"))
+        {
+            FindObjectOfType<groundSpawner>().SpawnGround();
+        }
+           
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("spawnGround"))
+        {
+            Destroy(other.gameObject, 0.1f);
         }
     }
 }

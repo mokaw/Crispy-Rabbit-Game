@@ -15,6 +15,7 @@ public class groundSpawner : MonoBehaviour
 
     public void SpawnGround()
     {
-        Instantiate(groundPrefab, nextSpawnPos, Quaternion.identity);
+       GameObject temp = Instantiate(groundPrefab, nextSpawnPos, Quaternion.identity);
+       nextSpawnPos = temp.transform.GetChild(1).transform.position;
     }
 }
