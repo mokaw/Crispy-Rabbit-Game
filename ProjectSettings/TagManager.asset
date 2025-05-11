@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - spawnGround
+  - Obstacle
   layers:
   - Default
   - TransparentFX

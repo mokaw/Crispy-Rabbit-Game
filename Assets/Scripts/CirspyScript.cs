@@ -50,6 +50,14 @@ public class CirspyScript : MonoBehaviour
         {
             FindObjectOfType<groundSpawner>().SpawnGround();
         }
+
+        if (other.CompareTag("Obstacle"))
+        {
+            Debug.Log("Collision with Obstacle");
+
+            Destroy(other.gameObject);
+            moveSpeed --;
+        }
            
     }
 
