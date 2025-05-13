@@ -35,33 +35,20 @@ public class groundSpawner : MonoBehaviour
             float rightPos = temp.transform.position.x + (groundWidth / 2 - 1);
             float x = Random.Range(leftPos, rightPos);
             Vector3 pos = new Vector3(x, -6, transform.position.y);
+            float playerWidth = playerCol.size.x * transform.localScale.x + 4.5f;
+          
 
-            //TODO: Obstale müssen einen bestimmten Abstand zueinander haben --> Collider width Crispy
-      
-            float playerWidth = playerCol.size.x * transform.localScale.x + 4f;
-          
-    
-          
             if(pos.x > (tempObstaclePos + playerWidth))
             {
                     GameObject obstacle = Instantiate(obstacleToSpawn, pos, Quaternion.identity); 
-                    tempObstaclePos = obstacle.transform.position.x;
+                    tempObstaclePos = obstacle.transform.position.x; 
+                 
             }
-
-
            
-            //deleteObstacle(obstacle);
-            
 
         }
 
      
     }
 
-    private void deleteObstacle(GameObject obs)
-    {
-        Destroy(obs, 30f);
-        //TODO: Obstacle nach einer bestimmten Zeit löschne --> wenn mit dem Boxcollider von ground collidiert/verlässt
-       
-    }
 }
