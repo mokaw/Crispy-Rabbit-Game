@@ -7,18 +7,12 @@ public class groundSpawner : MonoBehaviour
     public GameObject groundPrefab;
     public Vector3 nextSpawnPos;
     public GameObject[] obstaclePrefabs;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (groundPrefab == null)
-        {
-            Debug.LogError("Ground Prefab ist nicht zugewiesen!");
-        }
-        else
-        {
-            Debug.Log("Ground Prefab OK: " + groundPrefab.name);
-        }
+             
         SpawnGround();
     }
 
@@ -26,10 +20,14 @@ public class groundSpawner : MonoBehaviour
     {
        GameObject temp = Instantiate(groundPrefab, nextSpawnPos, Quaternion.identity);
        nextSpawnPos = temp.transform.GetChild(1).transform.position;
+       
+        float tempObstaclePos = 0;
+        int obstacleNum = Random.Range(0, 5);
 
-        int obstacleNum = Random.Range(0, 3);
         for(int i=0; i < obstacleNum; i++)
-        {
+        {   
+           
+            BoxCollider2D playerCol = player.GetComponent<BoxCollider2D>();
             GameObject obstacleToSpawn = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
             BoxCollider2D colGround = temp.GetComponent<BoxCollider2D>();
             float groundWidth = colGround.size.x * transform.localScale.x;
@@ -38,10 +36,20 @@ public class groundSpawner : MonoBehaviour
             float x = Random.Range(leftPos, rightPos);
             Vector3 pos = new Vector3(x, -6, transform.position.y);
 
-            //TODO: Obstale müssen einen bestimmten Abstand zueinander haben
+            //TODO: Obstale müssen einen bestimmten Abstand zueinander haben --> Collider width Crispy
+      
+            float playerWidth = playerCol.size.x * transform.localScale.x + 4f;
+          
+    
+          
+            if(pos.x > (tempObstaclePos + playerWidth))
+            {
+                    GameObject obstacle = Instantiate(obstacleToSpawn, pos, Quaternion.identity); 
+                    tempObstaclePos = obstacle.transform.position.x;
+            }
 
-            GameObject obstacle = Instantiate(obstacleToSpawn, pos, Quaternion.identity);
 
+           
             //deleteObstacle(obstacle);
             
 
