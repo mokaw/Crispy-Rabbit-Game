@@ -1335,6 +1335,7 @@ MonoBehaviour:
   obstaclePrefabs:
   - {fileID: 3328627718600511742, guid: cf0e4d37352dc074ea9d6a0a08ef0aca, type: 3}
   player: {fileID: 113624816}
+  powerUpPrefab: {fileID: 7043096832064642159, guid: b9f1afa7a77de434a9a9d3414d9d0fce, type: 3}
 --- !u!4 &1854941758
 Transform:
   m_ObjectHideFlags: 0

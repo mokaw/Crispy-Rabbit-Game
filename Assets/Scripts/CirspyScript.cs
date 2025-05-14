@@ -58,6 +58,12 @@ public class CirspyScript : MonoBehaviour
             Destroy(other.gameObject);
             moveSpeed --;
         }
+
+        if (other.CompareTag("PowerUp"))
+        {
+            Destroy(other.gameObject);
+            moveSpeed++;
+        }
            
     }
 
@@ -65,7 +71,7 @@ public class CirspyScript : MonoBehaviour
     {
         if (other.CompareTag("spawnGround"))
         {
-            Destroy(other.gameObject, 0.1f);
+            Destroy(other.gameObject, 2);
         }
     }
 }

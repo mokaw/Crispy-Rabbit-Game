@@ -8,6 +8,7 @@ public class groundSpawner : MonoBehaviour
     public Vector3 nextSpawnPos;
     public GameObject[] obstaclePrefabs;
     public GameObject player;
+    public GameObject powerUpPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -22,9 +23,11 @@ public class groundSpawner : MonoBehaviour
        nextSpawnPos = temp.transform.GetChild(1).transform.position;
        
         float tempObstaclePos = 0;
-        int obstacleNum = Random.Range(0, 5);
+        float tempPowerUp = 0;
+        int obstacleNum = Random.Range(0, 4);
+        int powerUpNum = Random.Range(0, 2);
 
-        for(int i=0; i < obstacleNum; i++)
+        for (int i=0; i < obstacleNum; i++)
         {   
            
             BoxCollider2D playerCol = player.GetComponent<BoxCollider2D>();
@@ -33,20 +36,40 @@ public class groundSpawner : MonoBehaviour
             float groundWidth = colGround.size.x * transform.localScale.x;
             float leftPos = temp.transform.position.x - (groundWidth / 2 - 1);
             float rightPos = temp.transform.position.x + (groundWidth / 2 - 1);
+
             float x = Random.Range(leftPos, rightPos);
-            Vector3 pos = new Vector3(x, -6, transform.position.y);
-            float playerWidth = playerCol.size.x * transform.localScale.x + 4.5f;
+            Vector3 posObs = new Vector3(x, -6, transform.position.y);
+           
+            x = Random.Range(leftPos, rightPos);
+            Vector3 posPow = new Vector3(x +20, 4, transform.position.y);
+
+            float playerWidth = playerCol.size.x * transform.localScale.x + 6;
           
 
-            if(pos.x > (tempObstaclePos + playerWidth))
+            if(posObs.x > (tempObstaclePos + playerWidth))
             {
-                    GameObject obstacle = Instantiate(obstacleToSpawn, pos, Quaternion.identity); 
+                    GameObject obstacle = Instantiate(obstacleToSpawn, posObs, Quaternion.identity); 
                     tempObstaclePos = obstacle.transform.position.x; 
                  
             }
-           
+
+             for(int j=0; j < powerUpNum; j++)
+                    {
+                        if(posPow.x > (tempPowerUp + playerWidth) && posPow.x != (posObs.x + 3))
+                                    {
+                                        GameObject powerUp = Instantiate(powerUpPrefab, posPow, Quaternion.identity);
+                                        tempPowerUp = powerUp.transform.position.x;
+                                    }
+            
+                    }
+
+            
+
 
         }
+
+       
+
 
      
     }
