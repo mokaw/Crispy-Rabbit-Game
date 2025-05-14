@@ -8,6 +8,7 @@ TagManager:
   - spawnGround
   - Obstacle
   - EndOfFrame
+  - PowerUp
   layers:
   - Default
   - TransparentFX
