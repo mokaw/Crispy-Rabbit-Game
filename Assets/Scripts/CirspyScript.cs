@@ -10,15 +10,6 @@ public class CirspyScript : MonoBehaviour
     private bool isJumping = false;
 
 
-    private void Awake()
-    {
-
-        // Calculate movement direction
-        
-
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         CapsuleCollider2D isGround = gameObject.GetComponent<CapsuleCollider2D>();
@@ -35,7 +26,12 @@ public class CirspyScript : MonoBehaviour
             myRigidbody.velocity = Vector2.up * jumpHeight;
             isJumping = true;
         }
-    
+        
+        if(moveSpeed < 8)
+        {
+            Debug.Log("Quit triggered");
+            Application.Quit();
+        }
         
     }
 
@@ -62,7 +58,13 @@ public class CirspyScript : MonoBehaviour
         if (other.CompareTag("PowerUp"))
         {
             Destroy(other.gameObject);
-            moveSpeed++;
+            moveSpeed ++;
+        }
+
+        if (other.CompareTag("Rabbit"))
+        {
+            Debug.Log("Quit triggered");
+            Application.Quit();
         }
            
     }
