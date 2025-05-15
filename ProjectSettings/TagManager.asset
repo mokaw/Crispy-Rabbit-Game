@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - EndOfFrame
   - PowerUp
+  - Rabbit
   layers:
   - Default
   - TransparentFX
