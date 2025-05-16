@@ -38,10 +38,23 @@ public class groundSpawner : MonoBehaviour
             float rightPos = temp.transform.position.x + (groundWidth / 2 - 1);
 
             float x = Random.Range(leftPos, rightPos);
-            Vector3 posObs = new Vector3(x, -6, transform.position.y);
+            Vector3 posObs;
+
+
+            if (obstacleToSpawn.name == "Stone")
+            {
+                posObs = new Vector3 (x, -4.3f , transform.position.z);
+            } else if(obstacleToSpawn.name == "Triangle")
+            {
+                posObs = new Vector3 (x, -5.6f, -3.1f);
+            } else
+            {
+                posObs = new Vector3(x, -9.9f, -4.4f);
+            }
            
             x = Random.Range(leftPos, rightPos);
-            Vector3 posPow = new Vector3(x +20, 4, transform.position.y);
+            Vector3 posPow = new Vector3(x +20, 4, transform.position.z);
+          
 
             float playerWidth = playerCol.size.x * transform.localScale.x + 6;
           
