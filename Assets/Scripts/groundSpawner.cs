@@ -46,10 +46,10 @@ public class groundSpawner : MonoBehaviour
                 posObs = new Vector3 (x, -4.3f , transform.position.z);
             } else if(obstacleToSpawn.name == "Triangle")
             {
-                posObs = new Vector3 (x, -5.6f, -3.1f);
+                posObs = new Vector3 (x, -5.6f, -3);
             } else
             {
-                posObs = new Vector3(x, -9.9f, -4.4f);
+                posObs = new Vector3(x, -6.2f, -3);
             }
            
             x = Random.Range(leftPos, rightPos);
