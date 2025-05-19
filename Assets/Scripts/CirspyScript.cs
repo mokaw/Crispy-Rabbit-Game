@@ -8,7 +8,9 @@ public class CirspyScript : MonoBehaviour
     public float jumpHeight;
     public float moveSpeed;
     private bool isJumping = false;
+    public Animator animator;
 
+    [SerializeField] float gravityScale = 5;
 
     void Start()
     {
@@ -23,11 +25,15 @@ public class CirspyScript : MonoBehaviour
 
         if (Input.GetMouseButton(0) && !isJumping)
         {
-            myRigidbody.velocity = Vector2.up * jumpHeight;
+            myRigidbody.gravityScale = gravityScale;
+            float jumpForce = Mathf.Sqrt(jumpHeight * (Physics2D.gravity.y * myRigidbody.gravityScale) * -2) * myRigidbody.mass;
+
+            myRigidbody.velocity = Vector2.up * jumpForce;
             isJumping = true;
+            animator.SetBool("isJumping", true);
         }
-        
-        if(moveSpeed < 8)
+
+        if (moveSpeed < 8)
         {
             Debug.Log("Quit triggered");
             Application.Quit();
@@ -39,7 +45,8 @@ public class CirspyScript : MonoBehaviour
     {
         if (other.CompareTag("ground"))
         {
-            isJumping = false;     
+            isJumping = false;
+            animator.SetBool("isJumping", false);
         }
 
         if (other.CompareTag("spawnGround"))
@@ -53,12 +60,14 @@ public class CirspyScript : MonoBehaviour
 
             Destroy(other.gameObject);
             moveSpeed --;
+            gravityScale = gravityScale - 0.5f;
         }
 
         if (other.CompareTag("PowerUp"))
         {
             Destroy(other.gameObject);
             moveSpeed ++;
+            gravityScale += 0.5f;
         }
 
         if (other.CompareTag("Rabbit"))
