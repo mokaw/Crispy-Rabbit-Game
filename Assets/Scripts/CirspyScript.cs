@@ -6,22 +6,26 @@ public class CirspyScript : MonoBehaviour
 {
     public Rigidbody2D myRigidbody;
     public float jumpHeight;
-    public float moveSpeed;
+    public int moveSpeed;
     private bool isJumping = false;
     public Animator animator;
+    public Animator speedAnimator;
 
     [SerializeField] float gravityScale = 5;
+    public GameObject speedUI;
 
     void Start()
     {
         CapsuleCollider2D isGround = gameObject.GetComponent<CapsuleCollider2D>();
+        speedAnimator = speedUI.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Time Scale: " + Time.timeScale);
         gameObject.transform.position += Vector3.right * Time.deltaTime * moveSpeed;  // deltaTime = Einheiten pro Sekunde 
-                                                                                      // ohne deltaTime = Einheiten pro Frame
+                                                                                      // ohne deltaTime = Einheiten pro Frame                                
 
         if (Input.GetMouseButton(0) && !isJumping)
         {
@@ -43,10 +47,13 @@ public class CirspyScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        
+
         if (other.CompareTag("ground"))
         {
             isJumping = false;
             animator.SetBool("isJumping", false);
+            animator.SetBool("triggersObstacle", false);
         }
 
         if (other.CompareTag("spawnGround"))
@@ -60,14 +67,21 @@ public class CirspyScript : MonoBehaviour
 
             Destroy(other.gameObject);
             moveSpeed --;
-            gravityScale = gravityScale - 0.5f;
+            gravityScale = gravityScale - 0.5f; 
+            animator.SetBool("triggersObstacle", true);
+            speedAnimator.SetInteger("playerSpeed", moveSpeed);
+           
         }
+
+
+       
 
         if (other.CompareTag("PowerUp"))
         {
             Destroy(other.gameObject);
             moveSpeed ++;
             gravityScale += 0.5f;
+            speedAnimator.SetInteger("playerSpeed", moveSpeed);
         }
 
         if (other.CompareTag("Rabbit"))
