@@ -10,6 +10,8 @@ public class CirspyScript : MonoBehaviour
     private bool isJumping = false;
     public Animator animator;
     public Animator speedAnimator;
+    public GameOver GameOver;
+    public Winning Winning;
 
     [SerializeField] float gravityScale = 5;
     public GameObject speedUI;
@@ -37,10 +39,12 @@ public class CirspyScript : MonoBehaviour
             animator.SetBool("isJumping", true);
         }
 
-        if (moveSpeed < 8)
+        if (moveSpeed <= 8)
         {
             Debug.Log("Quit triggered");
             Application.Quit();
+            GameOver.Setup();
+            moveSpeed = 0;
         }
         
     }
@@ -88,6 +92,7 @@ public class CirspyScript : MonoBehaviour
         {
             Debug.Log("Quit triggered");
             Application.Quit();
+            Winning.Setup();
         }
            
     }
