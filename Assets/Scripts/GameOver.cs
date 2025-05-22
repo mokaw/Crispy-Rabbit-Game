@@ -32,6 +32,11 @@ public class GameOver : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void MenuButton()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
  
 
 }
