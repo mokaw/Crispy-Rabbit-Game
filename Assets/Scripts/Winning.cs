@@ -26,9 +26,10 @@ public class Winning : MonoBehaviour
 
 
     }
-
-    public void RestartButton()
+    public void MenuButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("StartScreen");
     }
+
+
 }
