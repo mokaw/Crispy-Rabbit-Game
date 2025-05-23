@@ -43,7 +43,7 @@ public class groundSpawner : MonoBehaviour
 
             if (obstacleToSpawn.name == "Stone")
             {
-                posObs = new Vector3 (x, -4.3f , transform.position.z);
+                posObs = new Vector3 (x, -4.5f , -3);
             } else if(obstacleToSpawn.name == "Triangle")
             {
                 posObs = new Vector3 (x, -5.6f, -3);

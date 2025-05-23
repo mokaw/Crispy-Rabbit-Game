@@ -15,11 +15,14 @@ public class CirspyScript : MonoBehaviour
 
     [SerializeField] float gravityScale = 5;
     public GameObject speedUI;
+    public int distanceCrispy;
+    private float startPos;
 
     void Start()
     {
         CapsuleCollider2D isGround = gameObject.GetComponent<CapsuleCollider2D>();
         speedAnimator = speedUI.GetComponent<Animator>();
+        startPos = transform.position.x;
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class CirspyScript : MonoBehaviour
         Debug.Log("Time Scale: " + Time.timeScale);
         gameObject.transform.position += Vector3.right * Time.deltaTime * moveSpeed;  // deltaTime = Einheiten pro Sekunde 
                                                                                       // ohne deltaTime = Einheiten pro Frame                                
+        distanceCrispy = (int) (transform.position.x - startPos);    
 
         if (Input.GetMouseButton(0) && !isJumping)
         {
@@ -92,7 +96,7 @@ public class CirspyScript : MonoBehaviour
         {
             Debug.Log("Quit triggered");
             Application.Quit();
-            Winning.Setup();
+            Winning.Setup(distanceCrispy);
         }
            
     }

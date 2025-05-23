@@ -8,7 +8,6 @@ public class GameOver : MonoBehaviour
     public GameObject[] GameOverScreenText;
 
     private int number ;
-
     public void Start()
     {
         foreach (GameObject screen in GameOverScreenText)
@@ -23,7 +22,6 @@ public class GameOver : MonoBehaviour
     public void Setup ()
     {
         gameObject.SetActive(true);
-        
         
     }
 
