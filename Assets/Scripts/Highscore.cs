@@ -62,7 +62,7 @@ public class Highscore : MonoBehaviour
     }
     private void CreateHighScoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)
         {
-            float templateHeight = 30f;
+            float templateHeight = 50f;
             Transform entryTransform = Instantiate(entryTemplate, entryContainer);
             RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
 

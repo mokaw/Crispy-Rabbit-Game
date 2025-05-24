@@ -23,6 +23,7 @@ public class CirspyScript : MonoBehaviour
         CapsuleCollider2D isGround = gameObject.GetComponent<CapsuleCollider2D>();
         speedAnimator = speedUI.GetComponent<Animator>();
         startPos = transform.position.x;
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -38,7 +39,7 @@ public class CirspyScript : MonoBehaviour
             myRigidbody.gravityScale = gravityScale;
             float jumpForce = Mathf.Sqrt(jumpHeight * (Physics2D.gravity.y * myRigidbody.gravityScale) * -2) * myRigidbody.mass;
 
-            myRigidbody.velocity = Vector2.up * jumpForce;
+            myRigidbody.linearVelocity = Vector2.up * jumpForce;
             isJumping = true;
             animator.SetBool("isJumping", true);
         }
@@ -46,7 +47,7 @@ public class CirspyScript : MonoBehaviour
         if (moveSpeed <= 8)
         {
             Debug.Log("Quit triggered");
-            Application.Quit();
+            Time.timeScale = 0f;
             GameOver.Setup();
             moveSpeed = 0;
         }
@@ -95,7 +96,7 @@ public class CirspyScript : MonoBehaviour
         if (other.CompareTag("Rabbit"))
         {
             Debug.Log("Quit triggered");
-            Application.Quit();
+            Time.timeScale = 0f;
             Winning.Setup(distanceCrispy);
         }
            

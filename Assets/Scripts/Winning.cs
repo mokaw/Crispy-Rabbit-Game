@@ -33,14 +33,14 @@ public class Winning : MonoBehaviour
         score = distance;
 
    
-        if (score < Highscore.highscoreList[Highscore.highscoreList.Length - 1])
+        if (score > Highscore.highscoreList[Highscore.highscoreList.Length - 1])
         {
             Highscore.AddHighscoreEntry(score);
             scoreText.text = "Neuer Highscore: " + score.ToString();
         }
         else
         {
-            scoreText.text = "Dein Score:   " + score.ToString();
+            scoreText.text = "Dein Score:" + score.ToString();
         }
 
 
