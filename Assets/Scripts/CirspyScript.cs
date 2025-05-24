@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class CirspyScript : MonoBehaviour
 {
@@ -18,8 +19,11 @@ public class CirspyScript : MonoBehaviour
     public int distanceCrispy;
     private float startPos;
 
+    private bool hasCollided = false;
+
     void Start()
     {
+        
         CapsuleCollider2D isGround = gameObject.GetComponent<CapsuleCollider2D>();
         speedAnimator = speedUI.GetComponent<Animator>();
         startPos = transform.position.x;
@@ -36,12 +40,14 @@ public class CirspyScript : MonoBehaviour
 
         if (Input.GetMouseButton(0) && !isJumping)
         {
+
             myRigidbody.gravityScale = gravityScale;
             float jumpForce = Mathf.Sqrt(jumpHeight * (Physics2D.gravity.y * myRigidbody.gravityScale) * -2) * myRigidbody.mass;
 
             myRigidbody.linearVelocity = Vector2.up * jumpForce;
             isJumping = true;
             animator.SetBool("isJumping", true);
+            
         }
 
         if (moveSpeed <= 8)
@@ -53,6 +59,13 @@ public class CirspyScript : MonoBehaviour
         }
         
     }
+
+    IEnumerator ResetCollisionFlag()
+    {
+        yield return new WaitForSeconds(0.01f);
+        hasCollided = false;
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -70,36 +83,48 @@ public class CirspyScript : MonoBehaviour
             FindObjectOfType<groundSpawner>().SpawnGround();
         }
 
-        if (other.CompareTag("Obstacle"))
+        if (!hasCollided)
         {
-            Debug.Log("Collision with Obstacle");
+            if (other.CompareTag("Obstacle"))
+            {
+                Debug.Log("Collision with Obstacle");
+                hasCollided = true;
+                Destroy(other.gameObject);
+                moveSpeed--;
+                gravityScale = gravityScale - 0.5f;
+                animator.SetBool("triggersObstacle", true);
+                speedAnimator.SetInteger("playerSpeed", moveSpeed);
 
-            Destroy(other.gameObject);
-            moveSpeed --;
-            gravityScale = gravityScale - 0.5f; 
-            animator.SetBool("triggersObstacle", true);
-            speedAnimator.SetInteger("playerSpeed", moveSpeed);
-           
+                StartCoroutine(ResetCollisionFlag());
+                
+
+            }
+
+            if (other.CompareTag("PowerUp"))
+            {
+                hasCollided = true;
+                Destroy(other.gameObject);
+                moveSpeed++;
+                gravityScale += 0.5f;
+                speedAnimator.SetInteger("playerSpeed", moveSpeed);
+
+                StartCoroutine(ResetCollisionFlag());
+            }
+
+            if (other.CompareTag("Rabbit"))
+            {
+                hasCollided = true;
+                Debug.Log("Quit triggered");
+                Time.timeScale = 0f;
+                Winning.Setup(distanceCrispy);
+
+            }
         }
 
 
-       
 
-        if (other.CompareTag("PowerUp"))
-        {
-            Destroy(other.gameObject);
-            moveSpeed ++;
-            gravityScale += 0.5f;
-            speedAnimator.SetInteger("playerSpeed", moveSpeed);
-        }
 
-        if (other.CompareTag("Rabbit"))
-        {
-            Debug.Log("Quit triggered");
-            Time.timeScale = 0f;
-            Winning.Setup(distanceCrispy);
-        }
-           
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
