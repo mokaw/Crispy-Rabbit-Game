@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Highscore : MonoBehaviour
 {
-    public Transform entryContainer;
-    public Transform entryTemplate;
-    private List<Transform> highscoreEntryTransformList;
+    public  Transform entryContainer;
+    public  Transform entryTemplate;
+    private  List<Transform> highscoreEntryTransformList;
 
-    public static int[] highscoreList= new int[10];
-
+    public  int[] highscoreList= new int[10];
 
     private void Awake()
     {
@@ -62,7 +61,7 @@ public class Highscore : MonoBehaviour
     }
     private void CreateHighScoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)
         {
-            float templateHeight = 30f;
+            float templateHeight = 50f;
             Transform entryTransform = Instantiate(entryTemplate, entryContainer);
             RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
 
