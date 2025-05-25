@@ -71,16 +71,25 @@ public class Highscore : MonoBehaviour
     {
         HighscoreEntry highscoreEntry = new HighscoreEntry { score = score };
 
-
         string jsonString = PlayerPrefs.GetString("highscoreTable");
+
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+
+        if (highscores == null)
+        {
+            highscores = new Highscores();
+            highscores.highscoreEntryList = new List<HighscoreEntry>();
+        }
+        else if (highscores.highscoreEntryList == null)
+        {
+            highscores.highscoreEntryList = new List<HighscoreEntry>();
+        }
 
         highscores.highscoreEntryList.Add(highscoreEntry);
 
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("highscoreTable", json);
         PlayerPrefs.Save();
-
     }
 
     private class Highscores
