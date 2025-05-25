@@ -33,7 +33,6 @@ public class CirspyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Time Scale: " + Time.timeScale);
         gameObject.transform.position += Vector3.right * Time.deltaTime * moveSpeed;  // deltaTime = Einheiten pro Sekunde 
                                                                                       // ohne deltaTime = Einheiten pro Frame                                
         distanceCrispy = (int) (transform.position.x - startPos);    
@@ -52,7 +51,6 @@ public class CirspyScript : MonoBehaviour
 
         if (moveSpeed <= 8)
         {
-            Debug.Log("Quit triggered");
             Time.timeScale = 0f;
             GameOver.Setup();
             moveSpeed = 0;
@@ -87,7 +85,6 @@ public class CirspyScript : MonoBehaviour
         {
             if (other.CompareTag("Obstacle"))
             {
-                Debug.Log("Collision with Obstacle");
                 hasCollided = true;
                 Destroy(other.gameObject);
                 moveSpeed--;
@@ -114,7 +111,6 @@ public class CirspyScript : MonoBehaviour
             if (other.CompareTag("Rabbit"))
             {
                 hasCollided = true;
-                Debug.Log("Quit triggered");
                 Time.timeScale = 0f;
                 Winning.Setup(distanceCrispy);
 

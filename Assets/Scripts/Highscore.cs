@@ -10,13 +10,11 @@ public class Highscore : MonoBehaviour
     public  Transform entryTemplate;
     private  List<Transform> highscoreEntryTransformList;
 
-    public  int[] highscoreList= new int[10];
-
     private void Awake()
     {
         entryTemplate.gameObject.SetActive(false);
 
-        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        string jsonString = PlayerPrefs.GetString("highscoreTable"); 
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
         for ( int i  = 0; i < highscores.highscoreEntryList.Count; i++)
@@ -37,18 +35,6 @@ public class Highscore : MonoBehaviour
             highscores.highscoreEntryList = highscores.highscoreEntryList.GetRange(0, 10);
         }
 
-        for(int i= 0; i< 10; i++)
-        {
-            if (i < highscores.highscoreEntryList.Count && highscores.highscoreEntryList[i] != null)
-            {
-                highscoreList[i] = highscores.highscoreEntryList[i].score;
-            }
-            else
-            {
-                highscoreList[i] = 0; 
-            }
-
-        }
 
         highscoreEntryTransformList = new List<Transform>();
 
@@ -62,7 +48,7 @@ public class Highscore : MonoBehaviour
     private void CreateHighScoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)
         {
             float templateHeight = 50f;
-            Transform entryTransform = Instantiate(entryTemplate, entryContainer);
+            Transform entryTransform = Instantiate(entryTemplate, container);
             RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
 
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * transformList.Count);
@@ -106,7 +92,6 @@ public class Highscore : MonoBehaviour
     private class HighscoreEntry
     {
         public int score;
-        public string name;
     }
 
     public void startMenu()
