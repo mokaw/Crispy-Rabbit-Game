@@ -24,7 +24,7 @@ public class groundSpawner : MonoBehaviour
        
         float tempObstaclePos = 0;
         float tempPowerUp = 0;
-        int obstacleNum = Random.Range(0, 4);
+        int obstacleNum = Random.Range(0, 3);
         int powerUpNum = Random.Range(0, 2);
 
         for (int i=0; i < obstacleNum; i++)

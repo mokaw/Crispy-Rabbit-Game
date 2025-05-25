@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class Winning : MonoBehaviour
 {
@@ -23,7 +25,7 @@ public class Winning : MonoBehaviour
         }
 
 
-        number = Random.Range(0, WinningScreenText.Length);
+        number = UnityEngine.Random.Range(0, WinningScreenText.Length);
         WinningScreenText[number].SetActive(true);
 
     }
@@ -31,22 +33,10 @@ public class Winning : MonoBehaviour
     {
         gameObject.SetActive(true);
         score = distance;
-      
 
-       /* for(int i= 0; i < 10; i++)
-        {  Debug.Log("highscore List " +Highscore.highscoreList[i]);
-            if (score > Highscore.highscoreList[i])
-                    {
-                        Highscore.AddHighscoreEntry(score);
-                        scoreText.text = "Neuer Highscore: " + score.ToString();
-                    }
-                    else
-                    {
-                        scoreText.text = "Dein Score:" + score.ToString();
-                    }
-        } */
-   
-        
+        scoreText.text = "Dein Score: " + score;
+        Highscore.AddHighscoreEntry(score);
+
 
 
     }
@@ -59,5 +49,6 @@ public class Winning : MonoBehaviour
     {
         SceneManager.LoadScene("Highscore");
     }
+
 
 }
