@@ -29,3 +29,23 @@ Der Spieler steuert einen Hund, der versucht, einen Hasen einzuholen. Dabei muss
 - Highscore-System (Speicherung über `PlayerPrefs`)
 - Szenenwechsel über Unitys `SceneManager`
 - UI optimiert für mobile Geräte
+
+## Start-Menü
+
+![Start](Pictures/Screenshots/StartScreen.png)
+
+## Anleitung
+
+![Anleitung](Pictures/Screenshots/Anleitung.png)
+
+## Spiel
+
+![Game](Pictures/Screenshots/GameScreen.png)
+
+## Highscore-Screen
+
+![Highscore](Pictures/Screenshots/Highscore.png)
+
+## Gewinn-Screen
+
+![Winner](Pictures/Screenshots/WinnerScreen.jpg)
