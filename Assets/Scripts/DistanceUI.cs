@@ -20,6 +20,7 @@ public class DistanceUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // toString("000000") formatiert die Angabe der Distanz aus dem Crispy-Skript bzw. RabbitScript 
         distanceTextCrispy.text = player.distanceCrispy.ToString("000000");
         distanceTextRabbit.text = rabbit.distanceRabbit.ToString("000000");
     }
