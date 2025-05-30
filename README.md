@@ -32,20 +32,22 @@ Der Spieler steuert einen Hund, der versucht, einen Hasen einzuholen. Dabei muss
 
 ## Start-Menü
 
-![Start](Pictures/Screenshots/StartScreen.png)
+![Start](Assets/Pictures/Screenshots/StartScreen.jpg)
 
 ## Anleitung
 
-![Anleitung](Pictures/Screenshots/Anleitung.png)
+![Anleitung](Assets/Pictures/Screenshots/Anleitung.jpg)
 
 ## Spiel
 
-![Game](Pictures/Screenshots/GameScreen.png)
-
-## Highscore-Screen
-
-![Highscore](Pictures/Screenshots/Highscore.png)
+![Game](Assets/Pictures/Screenshots/GameScreen.jpg)
 
 ## Gewinn-Screen
 
-![Winner](Pictures/Screenshots/WinnerScreen.jpg)
+![Winner](Assets/Pictures/Screenshots/WinnerScreen.jpg)
+
+## Highscore-Screen
+
+![Highscore](Assets/Pictures/Screenshots/Highscore.jpg)
+
+
