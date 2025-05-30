@@ -23,11 +23,9 @@ public class CirspyScript : MonoBehaviour
 
     void Start()
     {
-        
-        CapsuleCollider2D isGround = gameObject.GetComponent<CapsuleCollider2D>();
         speedAnimator = speedUI.GetComponent<Animator>();
-        startPos = transform.position.x;
-        Time.timeScale = 1f;
+        startPos = transform.position.x;                                               // Startpos. laden für Distanz-Anzeige
+        Time.timeScale = 1f;                                                           // timescale = 1 --> Neustart nachdem das Spiel beendet wurde
     }
 
     // Update is called once per frame
@@ -37,13 +35,18 @@ public class CirspyScript : MonoBehaviour
                                                                                       // ohne deltaTime = Einheiten pro Frame                                
         distanceCrispy = (int) (transform.position.x - startPos);    
 
-        if (Input.GetMouseButton(0) && !isJumping)
+        if (Input.GetMouseButton(0) && !isJumping)                                     // soll verhindern, dass Spieler in der Luft nochmal springen kann
         {
 
             myRigidbody.gravityScale = gravityScale;
-            float jumpForce = Mathf.Sqrt(jumpHeight * (Physics2D.gravity.y * myRigidbody.gravityScale) * -2) * myRigidbody.mass;
 
+            //Berechnet Sprungkraft, basienrd auf Sprunghöhe, Gravitation und Masse
+            float jumpForce = Mathf.Sqrt(jumpHeight * (Physics2D.gravity.y * myRigidbody.gravityScale) * -2) * myRigidbody.mass;   
+
+            //Bewegt Spiele nach oben * jumpForce
             myRigidbody.linearVelocity = Vector2.up * jumpForce;
+
+
             isJumping = true;
             animator.SetBool("isJumping", true);
             
@@ -53,15 +56,14 @@ public class CirspyScript : MonoBehaviour
         {
             Time.timeScale = 0f;
             GameOver.Setup();
-            moveSpeed = 0;
         }
         
     }
 
-    IEnumerator ResetCollisionFlag()
+    IEnumerator ResetCollisionFlag()                            // soll verhindern, dass Spieler mehrmals mit einem Objekt kollidiert 
     {
-        yield return new WaitForSeconds(0.01f);
-        hasCollided = false;
+        yield return new WaitForSeconds(0.01f);                 // kurz warten (nicht blockierend)
+        hasCollided = false;                                    // danach Kollision wieder aktiviert
     }
 
 
@@ -78,7 +80,7 @@ public class CirspyScript : MonoBehaviour
 
         if (other.CompareTag("spawnGround"))
         {
-            FindObjectOfType<groundSpawner>().SpawnGround();
+            FindObjectOfType<groundSpawner>().SpawnGround();             // ruft die Spawn-Methode für neuen Boden auf
         }
 
         if (!hasCollided)
@@ -92,7 +94,7 @@ public class CirspyScript : MonoBehaviour
                 animator.SetBool("triggersObstacle", true);
                 speedAnimator.SetInteger("playerSpeed", moveSpeed);
 
-                StartCoroutine(ResetCollisionFlag());
+                StartCoroutine(ResetCollisionFlag());                      // Coroutine stoppt Ausführung und fährtfort wo es aufgehört hat 
                 
 
             }
@@ -111,8 +113,8 @@ public class CirspyScript : MonoBehaviour
             if (other.CompareTag("Rabbit"))
             {
                 hasCollided = true;
-                Time.timeScale = 0f;
-                Winning.Setup(distanceCrispy);
+                Time.timeScale = 0f;                            
+                Winning.Setup(distanceCrispy);                              // Spiel wird beendet; timeScale = 0 --> stoppt das Spiel
 
             }
         }
@@ -125,6 +127,8 @@ public class CirspyScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        // Hintergrund, welcher nicht mehr im Frame ist, wird gelöscht
+
         if (other.CompareTag("spawnGround"))
         {
             Destroy(other.gameObject, 2);
