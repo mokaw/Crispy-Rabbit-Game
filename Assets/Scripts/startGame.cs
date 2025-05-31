@@ -23,4 +23,10 @@ public class startGame : MonoBehaviour
         // Blende Anleitung-Objekt aus, wenn Button gedrückt wurde
         instruction.SetActive(false);
     }
+
+    public void showHighscore()
+    {
+        //Starte HighscoreSzene, wenn Button gedrückt wurde
+        SceneManager.LoadScene("Highscore");
+    }
 }
